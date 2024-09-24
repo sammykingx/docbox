@@ -42,8 +42,10 @@ BASE_APPS = [
 
 # Project Specific App Registry 
 PROJECT_APPS = [
-    "auth.apps.AuthConfig",
+    "authentication.apps.AuthenticationConfig",
 ]
+
+AUTH_USER_MODEL = "authentication.CustomUser"
 
 # Django App Registry
 INSTALLED_APPS = BASE_APPS + PROJECT_APPS
@@ -86,7 +88,7 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
-    }
+    },
 }
 
 

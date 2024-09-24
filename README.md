@@ -38,6 +38,10 @@ In today's digital age, the secure and efficient management of documents is cruc
 - AWS account with S3 and EC2 access
 
 ### Installation
+- If your're using MYSQL in your environment, then install this packages on your system
+```bash
+sudo apt install -y python3-dev default-libmysqlclient-dev build-essential pkg-config libmysqlclient-dev
+```
 - Clone the repository:
 ```
 git clone https://github.com/sammykingx/docbox.git
