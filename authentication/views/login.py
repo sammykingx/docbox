@@ -5,4 +5,4 @@ from django.contrib.auth.views import LoginView
 
 # Create your views here.
 class UserLoginView(LoginView):
-    template_name = "auth/login.html"
+    template_name = "authentication/login.html"

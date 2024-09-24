@@ -71,6 +71,11 @@ $ source venv/bin/activate
 ```
 $ pip install -r requirements.txt
 ```
+- If you're Using MySQL as your Database, then install mysqclient in your virtual environment
+```zsh
+pip install mysqlclient
+```
+
 
 ## Configuration
 - Create a `.env` file in the project root directory and provide values for the following variables:
