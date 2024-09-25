@@ -72,8 +72,9 @@ venv
 # mkdocs documentation
 /site
 
-# backup files
+# project files
 docbox_copy/
+static/vendors/bootstrap/
 
 # file extensions
 *.zip

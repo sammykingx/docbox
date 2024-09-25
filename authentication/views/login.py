@@ -3,6 +3,5 @@ from django.http import HttpResponse
 from django.contrib.auth.views import LoginView
 
 
-# Create your views here.
 class UserLoginView(LoginView):
     template_name = "authentication/login.html"
