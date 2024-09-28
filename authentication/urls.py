@@ -5,8 +5,11 @@ from .views import login, register, password_actions
 
 
 urlpatterns = [
-    path("login/", login.UserLoginView.as_view(), name="user-login"),
-    path("register/", register.UserRegistrationView.as_view()),
+    path("login/", login.UserLoginView.as_view(), name="user_login"),
+    path("logout/", login.UserLogOutView.as_view(), name="user_logout"),
+    path("register/", register.UserRegistrationView.as_view(),
+         name="register_user"
+    ),
     path(
         "reset-password/",
         password_actions.SendResetLink.as_view(),

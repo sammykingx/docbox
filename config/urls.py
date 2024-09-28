@@ -22,10 +22,13 @@ import authentication.urls
 
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="index.html"), name="index-page"),
-    path("home/", RedirectView.as_view(pattern_name="index-page", permanent=True)),
-    path("about/", TemplateView.as_view(template_name="about.html",)),
+    path("", TemplateView.as_view(template_name="index.html"), name="index_page"),
+    path("home/", RedirectView.as_view(pattern_name="index_page", permanent=True)),
+    path("about/", TemplateView.as_view(template_name="about.html",), name="about_us"),
     path("contact-us/", TemplateView.as_view(template_name="contact_us.html"), name="contact_us"),
     path("admin/", admin.site.urls),
     path("accounts/", include(authentication.urls)),
+    path("dashboard/", TemplateView.as_view(template_name="accounts/dashboard.html"),
+         name="user_dashboard"
+    ),
 ]

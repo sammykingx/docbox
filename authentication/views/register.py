@@ -9,7 +9,7 @@ class UserRegistrationView(CreateView):
     template_name = "authentication/user_registration.html"
     form_class = RegistrationForm
     context_object_name = "user_registration"
-    success_url = reverse_lazy("user-login")
+    success_url = reverse_lazy("user_login")
      
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         response = super().form_valid(form)
