@@ -16,6 +16,7 @@ class CustomUser(AbstractUser):
         message="Phone numbers must be between 10 and 16 digits, with or without country code.",
     )
     
+    username = None
     email = models.EmailField(unique=True)
     phone_number = models.CharField(validators=[number_validator], max_length=15,)
     alt_number = models.CharField(
@@ -37,6 +38,7 @@ class CustomUser(AbstractUser):
     ]
     
     class Meta:
+        db_table = "app_users"
         verbose_name = "User Accounts"
         indexes = [
             models.Index(

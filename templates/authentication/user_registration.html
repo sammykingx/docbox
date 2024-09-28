@@ -13,8 +13,15 @@
     <form class="needs-validation" method="POST" novalidate>
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="class btn btn-primary">Login</button>
+        <button type="submit" class="class btn btn-primary">Register</button>
     </form>
+    {% if form.errors %}
+        <ul>
+            {% for field, errors in form.errors.items %}
+                <li>{{ field }}: {{ errors }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
     <script src="{% static 'vendors/bootstrap/js/bootstrap.min.js' %}"></script>
 </body>
 </html>
