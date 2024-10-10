@@ -20,7 +20,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure--c1tl)0ywdep^6-+5d6=6^5z^lx960r+hm35^msu32byhtuo+u"
+SECRET_KEY = (
+    "django-insecure--c1tl)0ywdep^6-+5d6=6^5z^lx960r+hm35^msu32byhtuo+u"
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -40,7 +42,7 @@ BASE_APPS = [
     "django.contrib.staticfiles",
 ]
 
-# Project Specific App Registry 
+# Project Specific App Registry
 PROJECT_APPS = [
     "authentication.apps.AuthenticationConfig",
 ]
@@ -138,3 +140,13 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# Email Configurations
+EMAIL_HOST = ""
+EMAIL_HOST_USER = ""
+EMAIL_HOST_PASSWORD = ""
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = "sammykingx <>"
+EMAIL_TIMEOUT = 300  # email timeout in seconds

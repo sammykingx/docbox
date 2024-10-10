@@ -1,14 +1,36 @@
 # auth app related views
 
-from django.urls import path
-from .views import login, register, password_actions
+from django.urls import path, reverse_lazy
+from django.views.generic import TemplateView
+from django.contrib.auth.views import LoginView, LogoutView
+from .views import register, password_actions
 
 
 urlpatterns = [
-    path("login/", login.UserLoginView.as_view(), name="user_login"),
-    path("logout/", login.UserLogOutView.as_view(), name="user_logout"),
-    path("register/", register.UserRegistrationView.as_view(),
-         name="register_user"
+    path(
+        "login/",
+        LoginView.as_view(
+            template_name="authentication/login.html",
+            next_page=reverse_lazy("user_dashboard"),
+        ),
+        name="user_login",
+    ),
+    path(
+        "logout/",
+        LogoutView.as_view(next_page=reverse_lazy("user_login")),
+        name="user_logout",
+    ),
+    path(
+        "register/",
+        register.UserRegistrationView.as_view(),
+        name="register_user",
+    ),
+    path(
+        "verify_account/<str:uid>/<str:token>/",
+        TemplateView.as_view(
+            template_name="authentication/verify_account.html",
+        ),
+        name="verify_account",
     ),
     path(
         "reset-password/",

@@ -8,26 +8,29 @@ class CustomUser(AbstractUser):
         ("admin", "Admin"),
         ("staff", "Staff"),
         ("user", "Standard User"),
-        ("guest", "Guests")
+        ("guest", "Guests"),
     ]
-    
+
     number_validator = RegexValidator(
-        regex=r'^\+?1?\d{10,16}$',
+        regex=r"^\+?1?\d{10,16}$",
         message="Phone numbers must be between 10 and 16 digits, with or without country code.",
     )
-    
+
     username = None
     email = models.EmailField(unique=True)
-    phone_number = models.CharField(validators=[number_validator], max_length=15,)
+    phone_number = models.CharField(
+        validators=[number_validator],
+        max_length=15,
+    )
     alt_number = models.CharField(
         validators=[number_validator],
         max_length=15,
         blank=True,
     )
-    
+
     role = models.CharField(max_length=20, choices=ROLE_OPTIONS)
     is_verified = models.BooleanField(default=False)
-    
+
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = [
         "first_name",
@@ -36,7 +39,7 @@ class CustomUser(AbstractUser):
         "phone_number",
         "role",
     ]
-    
+
     class Meta:
         db_table = "app_users"
         verbose_name = "User Accounts"
@@ -46,7 +49,9 @@ class CustomUser(AbstractUser):
                 name="email_idx",
             ),
         ]
-        
-        constraints = models.UniqueConstraint(
-            fields=["phone_number"],
-            name="unique_phone_number"),
+
+        constraints = (
+            models.UniqueConstraint(
+                fields=["phone_number"], name="unique_phone_number"
+            ),
+        )

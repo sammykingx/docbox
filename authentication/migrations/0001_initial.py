@@ -28,7 +28,12 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("password", models.CharField(max_length=128, verbose_name="password")),
+                (
+                    "password",
+                    models.CharField(
+                        max_length=128, verbose_name="password"
+                    ),
+                ),
                 (
                     "last_login",
                     models.DateTimeField(
@@ -61,13 +66,17 @@ class Migration(migrations.Migration):
                 (
                     "first_name",
                     models.CharField(
-                        blank=True, max_length=150, verbose_name="first name"
+                        blank=True,
+                        max_length=150,
+                        verbose_name="first name",
                     ),
                 ),
                 (
                     "last_name",
                     models.CharField(
-                        blank=True, max_length=150, verbose_name="last name"
+                        blank=True,
+                        max_length=150,
+                        verbose_name="last name",
                     ),
                 ),
                 (
@@ -89,7 +98,8 @@ class Migration(migrations.Migration):
                 (
                     "date_joined",
                     models.DateTimeField(
-                        default=django.utils.timezone.now, verbose_name="date joined"
+                        default=django.utils.timezone.now,
+                        verbose_name="date joined",
                     ),
                 ),
                 ("email", models.EmailField(max_length=254, unique=True)),
@@ -156,10 +166,13 @@ class Migration(migrations.Migration):
             ],
             options={
                 "verbose_name": "User Accounts",
-                "indexes": [models.Index(fields=["email"], name="email_idx")],
+                "indexes": [
+                    models.Index(fields=["email"], name="email_idx")
+                ],
                 "constraints": [
                     models.UniqueConstraint(
-                        fields=("phone_number",), name="unique_phone_number"
+                        fields=("phone_number",),
+                        name="unique_phone_number",
                     )
                 ],
             },

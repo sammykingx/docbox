@@ -10,6 +10,13 @@
 </head>
 <body>
     <h2>User Dashboard</h2>
+    <p>Hello {{ user.last_name }}</p>
+    <p>{{ request.session.keys }}</p>
+    <ul>
+        {% for key, value in request.session.items %}
+            <li>{{ key }}: {{ value }}</li>
+        {% endfor %}
+    </ul>
     <form action="{% url 'user_logout' %}" method="post">
         {% csrf_token %}
         <button type="submit" class="btn btn-success">Logout</button>
