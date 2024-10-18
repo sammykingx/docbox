@@ -6,7 +6,7 @@
       <meta name="x-apple-disable-message-reformatting">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta content="telephone=no" name="format-detection">
-      <title>New Message</title>
+      <title>Email Message</title>
       <!--[if (mso 16)]>
       <style type="text/css">     a {text-decoration: none;}     </style>
       <![endif]--> <!--[if gte mso 9]>
@@ -110,14 +110,7 @@
                                                 </tr>
                                                 <tr>
                                                    <td align="center" style="padding:0;Margin:0">
-                                                      [if mso]
-                                                      <a href="{{ protocol}}://{{ hostname }}{% url 'verify_account' uid=uid token=token %}" target="_blank" hidden>
-                                                         <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="{{ protocol}}://{{ hostname }}{% url 'verify_account' uid=uid token=token %}" style="height:49px; v-text-anchor:middle; width:272px" arcsize="50%" stroke="f" fillcolor="#2108df">
-                                                            <w:anchorlock></w:anchorlock>
-                                                            <center style='color:#ffffff; font-family:Poppins, sans-serif; font-size:16px; font-weight:400; line-height:16px; mso-text-raise:1px'>Confirm email address</center>
-                                                         </v:roundrect>
-                                                      </a>
-                                                      [endif] <!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#2CB543;background:#2108df;border-width:0px;display:inline-block;border-radius:30px;width:auto;mso-hide:all"><a href="{{ protocol}}://{{ hostname }}{% url 'verify_account' uid=uid token=token %}" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:16px;padding:15px 35px 15px 35px;display:inline-block;background:#2108df;border-radius:30px;font-family:Poppins, sans-serif;font-weight:normal;font-style:normal;line-height:19.2px;width:auto;text-align:center;mso-padding-alt:0;mso-border-alt:10px solid #2108df">Confirm email address</a></span> <!--<![endif]-->
+                                                      <span class="msohide es-button-border" style="border-style:solid;border-color:#2CB543;background:#2108df;border-width:0px;display:inline-block;border-radius:30px;width:auto;mso-hide:all"><a href="{{ protocol}}://{{ hostname }}{% url 'verify_account' uid=uid token=token %}" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:16px;padding:15px 35px 15px 35px;display:inline-block;background:#2108df;border-radius:30px;font-family:Poppins, sans-serif;font-weight:normal;font-style:normal;line-height:19.2px;width:auto;text-align:center;mso-padding-alt:0;mso-border-alt:10px solid #2108df">Confirm email address</a></span> <!--<![endif]-->
                                                    </td>
                                                 </tr>
                                              </table>

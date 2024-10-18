@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -143,10 +144,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # Email Configurations
-EMAIL_HOST = ""
-EMAIL_HOST_USER = ""
-EMAIL_HOST_PASSWORD = ""
-EMAIL_PORT = 465
+EMAIL_HOST = config("SMTP_SERVER")
+EMAIL_HOST_USER = config("EMAIL_ACCOUNT")
+EMAIL_HOST_PASSWORD = config("EMAIL_PASSWORD")
+EMAIL_PORT = config("SMTP_PORT", cast=int)
 EMAIL_USE_SSL = True
-DEFAULT_FROM_EMAIL = "sammykingx <>"
+DEFAULT_FROM_EMAIL = "sammykingx <seromosele@divgm.com>"
 EMAIL_TIMEOUT = 300  # email timeout in seconds

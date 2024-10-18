@@ -22,6 +22,7 @@ class UserRegistrationView(CreateView):
 
         user = form.save(commit=False)
         user.role = "staff"
+        print(f"user pk: {user.pk}")
         email_token = default_token_generator.make_token(user)
         response = super().form_valid(form)
 
