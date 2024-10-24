@@ -3,7 +3,7 @@
 from django.urls import path, reverse_lazy
 from django.views.generic import TemplateView
 from django.contrib.auth.views import LoginView, LogoutView
-from .views import register, password_actions
+from .views import register, password_actions, verify_account
 
 
 urlpatterns = [
@@ -25,11 +25,16 @@ urlpatterns = [
         register.UserRegistrationView.as_view(),
         name="register_user",
     ),
+    # path(
+    #     "verify_account/<str:uid>/<str:token>/",
+    #     TemplateView.as_view(
+    #         template_name="authentication/verify_account.html",
+    #     ),
+    #     name="verify_account",
+    # ),
     path(
         "verify_account/<str:uid>/<str:token>/",
-        TemplateView.as_view(
-            template_name="authentication/verify_account.html",
-        ),
+        verify_account.VerifyEmailView.as_view(),
         name="verify_account",
     ),
     path(

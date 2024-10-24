@@ -31,18 +31,6 @@ urlpatterns = [
         "home/",
         RedirectView.as_view(pattern_name="index_page", permanent=True),
     ),
-    path(
-        "about/",
-        TemplateView.as_view(
-            template_name="about.html",
-        ),
-        name="about_us",
-    ),
-    path(
-        "contact-us/",
-        TemplateView.as_view(template_name="contact_us.html"),
-        name="contact_us",
-    ),
     path("admin/", admin.site.urls),
     path("accounts/", include(authentication.urls)),
     path(

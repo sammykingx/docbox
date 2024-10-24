@@ -9,6 +9,7 @@ from django.template.loader import render_to_string
 from django.contrib.auth.tokens import default_token_generator
 from ..forms import RegistrationForm
 from common.utils import deliver_email
+from common.logger import logger
 
 
 class UserRegistrationView(CreateView):
@@ -22,12 +23,12 @@ class UserRegistrationView(CreateView):
 
         user = form.save(commit=False)
         user.role = "staff"
-        print(f"user pk: {user.pk}")
-        email_token = default_token_generator.make_token(user)
         response = super().form_valid(form)
+        email_token = default_token_generator.make_token(user)
 
         if not self.send_welcome_email(email_token):
-            print("mail wasn't sent")
+            logger.error("mail wasn't sent")
+            # flash message
 
         # login user, welcome on board
         # send user welcome email on the backeground
@@ -43,9 +44,9 @@ class UserRegistrationView(CreateView):
         return response
     
 
-    def send_welcome_email(self, token: str) -> None:
+    def send_welcome_email(self, token: str) -> bool:
         """
-        send account activation toke to request user email address
+        send account activation token to request user email address
         """
 
         msg = render_to_string(

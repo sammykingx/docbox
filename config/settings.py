@@ -49,6 +49,7 @@ PROJECT_APPS = [
 ]
 
 AUTH_USER_MODEL = "authentication.CustomUser"
+PASSWORD_RESET_TIMEOUT = 900 # 15 mins
 
 # Django App Registry
 INSTALLED_APPS = BASE_APPS + PROJECT_APPS

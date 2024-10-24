@@ -1,6 +1,7 @@
 from django.core.mail import EmailMessage
 from django.core.mail import BadHeaderError
 from django.conf import settings
+from common.logger import logger
 import smtplib
 
 
@@ -25,21 +26,22 @@ def deliver_email(
     
     try:
         email_msg.send()
-        print("Email Sent to User successfully ✅")
 
     except (smtplib.SMTPConnectError, smtplib.SMTPAuthenticationError):
-        print("could not connect to server/servr unavailable")
+        logger.error("could not connect to server/servr unavailable")
         return False
     
     except smtplib.SMTPRecipientsRefused as err:
-        print(err)
+        logger.error(err)
         return False
     
     except BadHeaderError:
         return False
     
     except Exception:
-        print(f"UNCAUGHT EXCEPTION: {err}")
+        logger.error(f"UNCAUGHT EXCEPTION: {err}", exc_info=True)
         return  False
 
+
+    logger.info("Email Sent to User successfully ✅")
     return True

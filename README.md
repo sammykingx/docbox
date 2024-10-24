@@ -1,4 +1,6 @@
 # Introduction
+![Docbox Image](docs/docbox-hero-sctn.png)
+
 The Cloud Document Storage Platform(Docbox) is a scalable, secure, and user-friendly web application designed for storing, sharing, and managing company-sensitive files in the cloud. Built with Django, the platform offers robust features for user authentication, user management, file encryption, collaboration, and billing, making it suitable for enterprise-level use and potential SaaS offerings.
 
 With DocBox, you can upload, store, and retrieve your documents effortlessly, ensuring that your important files are always accessible and secure, no matter where you are.
