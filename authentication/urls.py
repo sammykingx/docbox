@@ -2,8 +2,17 @@
 
 from django.urls import path, reverse_lazy
 from django.views.generic import TemplateView
-from django.contrib.auth.views import LoginView, LogoutView
-from .views import register, password_actions, verify_account
+from django.contrib.auth.views import (
+    LoginView,
+    LogoutView,
+    PasswordResetView,
+    PasswordResetDoneView,
+    PasswordResetConfirmView,
+    PasswordResetCompleteView,
+    PasswordChangeView,
+    PasswordChangeDoneView,
+)
+from .views import register, verify_account
 
 
 urlpatterns = [
@@ -25,13 +34,6 @@ urlpatterns = [
         register.UserRegistrationView.as_view(),
         name="register_user",
     ),
-    # path(
-    #     "verify_account/<str:uid>/<str:token>/",
-    #     TemplateView.as_view(
-    #         template_name="authentication/verify_account.html",
-    #     ),
-    #     name="verify_account",
-    # ),
     path(
         "verify_account/<str:uid>/<str:token>/",
         verify_account.VerifyEmailView.as_view(),
@@ -39,16 +41,43 @@ urlpatterns = [
     ),
     path(
         "reset-password/",
-        password_actions.SendResetLink.as_view(),
+        PasswordResetView.as_view(
+            template_name = "authentication/password_reset.html",
+            email_template_name = "emails/pwd_reset_mail.html",
+            html_email_template_name = "emails/pwd_reset_mail.html",
+            subject_template_name = "emails/pwd_reset_email_sbj.txt",
+            success_url = reverse_lazy("reset-pwd-done"),
+        ),
         name="reset-password",
     ),
     path(
         "reset-password/done/",
-        password_actions.SendResetLinkDone.as_view(),
+        PasswordResetDoneView.as_view(
+            template_name = "authentication/password_reset_done.html"
+        ),
+        name="reset-pwd-done",
     ),
-    path("change-password/", password_actions.ChangePassword.as_view()),
+    path(
+        "change-password/<str:uidb64>/<str:token>/",
+        PasswordResetConfirmView.as_view(
+            template_name = "authentication/password_change.html",
+            success_url = reverse_lazy("change-pwd-done"),
+        ),
+        name="change-pwd"),
     path(
         "change-password/complete/",
-        password_actions.ChangePasswordComplete.as_view(),
+        PasswordResetCompleteView.as_view(
+            template_name="authentication/password_change_done.html",
+        ),
+        name="change-pwd-done"
     ),
+    path(
+        "update-password/",
+        PasswordChangeView.as_view(
+            template_name = "authentication/update_password.html",
+            success_url = reverse_lazy("user_dashboard"),
+        )
+    ),
+    # password chang for authenticated user
+    # password change done for auth user
 ]
