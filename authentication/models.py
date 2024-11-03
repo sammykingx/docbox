@@ -1,6 +1,25 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.core.validators import RegexValidator
+from datetime import datetime
+
+
+
+class CustomUserManager(BaseUserManager):
+    def create_user(self, *, email: str=None, password: str=None) -> AbstractUser:
+        if not email or not password:
+            missing_field = "Email" if not email else "Password"
+            raise ValueError(f"Missing {missing_field} Field.")
+        
+        user = self.model(
+            email=self.normalize_email(email),
+            date_joined=datetime.now(),
+            is_verified=True,
+        )
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+        
 
 
 class CustomUser(AbstractUser):
@@ -30,6 +49,7 @@ class CustomUser(AbstractUser):
 
     role = models.CharField(max_length=20, choices=ROLE_OPTIONS)
     is_verified = models.BooleanField(default=False)
+    objects = CustomUserManager()
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = [
