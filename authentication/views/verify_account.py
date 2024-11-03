@@ -9,6 +9,7 @@ from django.contrib.auth.tokens import default_token_generator
 from common.logger import logger
 from typing import Union
 
+
 class VerifyEmailView(View):
     http_method_names = ["get"]
     

@@ -1,5 +1,3 @@
-# auth app related views
-
 from django.urls import path, reverse_lazy
 from django.views.generic import TemplateView
 from django.contrib.auth.views import (
@@ -10,7 +8,6 @@ from django.contrib.auth.views import (
     PasswordResetConfirmView,
     PasswordResetCompleteView,
     PasswordChangeView,
-    PasswordChangeDoneView,
 )
 from .views import register, verify_account
 
@@ -76,8 +73,7 @@ urlpatterns = [
         PasswordChangeView.as_view(
             template_name = "authentication/update_password.html",
             success_url = reverse_lazy("user_dashboard"),
-        )
+        ),
+        name="update-pwd"
     ),
-    # password chang for authenticated user
-    # password change done for auth user
 ]

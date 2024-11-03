@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.core.validators import RegexValidator
-from datetime import datetime
+from django.utils import timezone
 
 
 
@@ -13,7 +13,7 @@ class CustomUserManager(BaseUserManager):
         
         user = self.model(
             email=self.normalize_email(email),
-            date_joined=datetime.now(),
+            date_joined=timezone.now(),
             is_verified=True,
         )
         user.set_password(password)
