@@ -48,7 +48,6 @@ class UserRegistrationView(CreateView):
         """
         send account activation token to request user email address
         """
-
         msg = render_to_string(
             template_name="emails/verify_email.html",
             context={
@@ -60,7 +59,6 @@ class UserRegistrationView(CreateView):
                 "hostname": self.request.get_host(),
             },
         )
-
         return deliver_email(
             mail_heading="Verify Your Account - docbox",
             mail_msg=msg,

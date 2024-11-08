@@ -17,6 +17,7 @@ from pathlib import Path
 START_COLOR = "\033[92m"
 END_COLOR = "\033[0m"
 CUR_DIR = Path(__file__).parent.name
+CUR_FILE = Path(__file__).name
 
 class TestUrls(TestCase):
     """
@@ -26,17 +27,25 @@ class TestUrls(TestCase):
     """
     @classmethod
     def setUpClass(cls) -> None:
-        cls.user = get_user_model().objects.create_user(
-            email="test@example.com",
-            password="samplePassword@!123",
-        )
-        print(f"{START_COLOR}Running {Path(__file__).name} in {CUR_DIR}{END_COLOR}")
+        print(f"{START_COLOR}Running {CUR_FILE} in {CUR_DIR}{END_COLOR}")
         return super().setUpClass()
     
     @classmethod
     def tearDownClass(cls) -> None:
-        print(f"{START_COLOR}Finished running all test{END_COLOR} ✅")
+        print(f"\n{START_COLOR}Finished running all test in {CUR_FILE}{END_COLOR} ✅\n")
         return super().tearDownClass()
+    
+    def setUp(self) -> None:
+        self.user = get_user_model().objects.create_user(
+            email="test@example.com",
+            password="samplePassword@!123",
+            is_verified=True,
+        )
+        return super().setUp()
+    
+    def tearDown(self) -> None:
+        get_user_model().objects.all().delete()
+        return super().tearDown()
 
     def testLogin(self) -> None:
         url = reverse_lazy("user_login")
@@ -111,3 +120,4 @@ class TestUrls(TestCase):
         response = self.client.get(url)
         self.assertEqual(resolved_view, PasswordChangeView)
         self.assertTemplateUsed(response, "authentication/update_password.html")
+

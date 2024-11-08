@@ -6,7 +6,7 @@ from django.utils import timezone
 
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, *, email: str=None, password: str=None) -> AbstractUser:
+    def create_user(self, *, email: str=None, password: str=None, **extra_fields) -> AbstractUser:
         if not email or not password:
             missing_field = "Email" if not email else "Password"
             raise ValueError(f"Missing {missing_field} Field.")
@@ -14,7 +14,7 @@ class CustomUserManager(BaseUserManager):
         user = self.model(
             email=self.normalize_email(email),
             date_joined=timezone.now(),
-            is_verified=True,
+            **extra_fields,
         )
         user.set_password(password)
         user.save(using=self._db)

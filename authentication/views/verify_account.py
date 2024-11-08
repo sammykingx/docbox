@@ -6,7 +6,6 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
-from common.logger import logger
 from typing import Union
 
 
@@ -25,7 +24,6 @@ class VerifyEmailView(View):
             context = dict(verified=True)
             
         else:
-            logger.info(f"uid: {uid}, token: {token}")
             context = dict(verified=False)
         
         return render(
@@ -48,7 +46,7 @@ class VerifyEmailView(View):
     def activate_account(self, user:AbstractUser) -> None:
         """
             updates user is_verified status to true directly
-            on  the database.
+            on the database.
             
             Note: This doesn't updates the previous call to
             user model, so previous call will still have it's
