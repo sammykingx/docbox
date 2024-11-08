@@ -1,8 +1,10 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
-from .models import CustomUser
 from typing import Any
+
+
+User = get_user_model()
 
 
 class RegistrationForm(UserCreationForm):
@@ -10,7 +12,7 @@ class RegistrationForm(UserCreationForm):
 
     def clean_email(self) -> str:
         email = self.cleaned_data.get("email")
-        if CustomUser.objects.filter(email=email).exists():
+        if User.objects.filter(email=email).exists():
             raise forms.ValidationError(
                 "It seems you already have an account"
             )
@@ -23,7 +25,7 @@ class RegistrationForm(UserCreationForm):
         password1 = cleaned_data.get("password1")
         password2 = cleaned_data.get("password2")
 
-        if CustomUser.objects.filter(phone_number=phone_number).exists():
+        if User.objects.filter(phone_number=phone_number).exists():
             self.add_error(
                 "phone_number", "Phone Number already registered"
             )
@@ -34,7 +36,7 @@ class RegistrationForm(UserCreationForm):
         return cleaned_data
 
     class Meta:
-        model = get_user_model()
+        model = User
         fields = (
             "first_name",
             "last_name",
